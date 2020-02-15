@@ -37,7 +37,7 @@ class DeleteSocialMediaImageController extends AbstractDeleteController
         $this->assertAdmin($request->getAttribute('actor'));
         $path = $this->settings->get('seo_social_media_image_path');
         $this->settings->set('seo_social_media_image_path', null);
-        $uploadDir = new Filesystem(new Local($this->app->publicPath().'/assets'));
+        $uploadDir = new Filesystem(new Local($this->app->publicPath().'/assets/files'));
         if ($uploadDir->has($path)) {
             $uploadDir->delete($path);
         }

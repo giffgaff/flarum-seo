@@ -81,6 +81,16 @@ class Discussion
      */
     private function createTags()
     {
+        $tags = $this->discussion->tags;
+        $robots = true;
+        foreach ($tags as $tag) {
+            if (array_search($tag->id, $this->parent->noIndexTags) !== false) {
+                $robots = false;
+            }
+        }
+
+        $this->parent->setRobots($robots);
+        
         // Update ld-json
         $this->parent
             ->setSchemaJson('@type', "DiscussionForumPosting")

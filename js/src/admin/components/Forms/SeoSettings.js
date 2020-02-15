@@ -26,7 +26,7 @@ export default class SeoSettings extends Component {
 
         // Cheat 'seo_social_media_imageUrl'
         // Todo: Find a better way
-        app.forum.data.attributes.seo_social_media_imageUrl = app.forum.attribute('baseUrl') + '/assets/' + app.data.settings.seo_social_media_image_path;
+        app.forum.data.attributes.seo_social_media_imageUrl = app.forum.attribute('baseUrl') + '/assets/files/' + app.data.settings.seo_social_media_image_path;
 
         this.showField = 'all';
 

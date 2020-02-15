@@ -54,6 +54,12 @@ class Tag
     {
         if(!method_exists($this->tag, "getAttribute")) return;
 
+        $robots = true;
+        if (array_search($this->tag->id, $this->parent->noIndexTags) !== false) {
+            $robots = false;
+        }
+        $this->parent->setRobots($robots);
+
         $lastPostedAt = (new \DateTime($this->tag->getAttribute('last_posted_at')))->format("c");
 
         // The tag plugin does not set page titles... Then we'll do that

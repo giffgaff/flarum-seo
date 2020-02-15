@@ -23,6 +23,8 @@ use Psr\Http\Message\ServerRequestInterface;
  */
 class PageListener
 {
+    public $noIndexTags = [50,201];
+    
     // Config
     protected $config;
     protected $applicationUrl;
@@ -89,7 +91,7 @@ class PageListener
         // When Flarum likes is disabled, then automatically index as default discussion page
         if(!$this->extensionEnabled("flarum-likes"))
         {
-            $this->discussionType = 1;
+            //$this->discussionType = 1;
         }
 
         // Settings debug settings: var_dump($this->settings->all());exit;
@@ -156,9 +158,19 @@ class PageListener
         }
 
         // Home page
-        else if($this->requestType === "") {
+        else if($this->requestType === "" || $this->requestType === 'al') {
             $this->setDescription($this->settings->get('forum_description'));
             $this->setTitle($this->settings->get('forum_title'));
+            $this->setRobots();
+        }
+    }
+
+    function setRobots($follow = true) {
+        if ($follow) {
+            $this->setMetaTag('robots', 'index, follow');
+        }
+        else {
+            $this->setMetaTag('robots', 'noindex, nofollow');
         }
     }
 
@@ -180,7 +192,7 @@ class PageListener
             ->setMetaPropertyTag('og:site_name', $applicationName)
 
             // Robots, follow please! :)
-            ->setMetaTag('robots', 'index, follow')
+            //->setMetaTag('robots', 'index, follow')
 
             // Twitter card
             ->setMetaTag('twitter:card', 'summary');
@@ -197,7 +209,7 @@ class PageListener
         // Set image
         if($applicationSeoSocialMediaImage !== null)
         {
-            $this->setImage($this->applicationUrl . '/assets/' . $applicationSeoSocialMediaImage);
+            $this->setImage($this->applicationUrl . '/assets/files/' . $applicationSeoSocialMediaImage);
         }
         // Fallback to the logo
         else if($applicationLogo !== null)

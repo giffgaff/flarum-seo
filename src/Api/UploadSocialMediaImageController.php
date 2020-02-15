@@ -5,7 +5,6 @@ use Flarum\Foundation\Application;
 use Flarum\Settings\SettingsRepositoryInterface;
 use Flarum\User\AssertPermissionTrait;
 use Illuminate\Support\Str;
-use Intervention\Image\ImageManager;
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use League\Flysystem\MountManager;
@@ -44,7 +43,7 @@ class UploadSocialMediaImageController extends ShowForumController
 
         $mount = new MountManager([
             'source' => new Filesystem(new Local(pathinfo($tmpFile, PATHINFO_DIRNAME))),
-            'target' => new Filesystem(new Local($this->app->publicPath().'/assets')),
+            'target' => new Filesystem(new Local($this->app->publicPath().'/assets/files')),
         ]);
 
         if (($path = $this->settings->get('seo_social_media_image_path')) && $mount->has($file = "target://$path")) {

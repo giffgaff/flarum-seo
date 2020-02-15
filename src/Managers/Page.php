@@ -46,6 +46,8 @@ class Page
      */
     private function createTags()
     {
+        $this->parent->setRobots();
+        
         if($this->page === null || !method_exists($this->page, "getAttribute")) return;
 
         // Published on

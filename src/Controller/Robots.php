@@ -2,8 +2,6 @@
 namespace V17Development\FlarumSeo\Controller;
 
 use Flarum\Settings\SettingsRepositoryInterface;
-
-use Illuminate\View\Factory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;

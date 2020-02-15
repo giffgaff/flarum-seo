@@ -3,9 +3,6 @@
 namespace V17Development\FlarumSeo;
 
 use Flarum\Extend;
-use Extend\Locales;
-use Extend\Routes;
-use Illuminate\Contracts\Events\Dispatcher;
 use V17Development\FlarumSeo\Api\DeleteSocialMediaImageController;
 use V17Development\FlarumSeo\Api\UploadSocialMediaImageController;
 use V17Development\FlarumSeo\Controller\Robots;

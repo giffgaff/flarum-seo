@@ -37,7 +37,7 @@ class QADiscussion
         $this->discussionId = $discussionId;
 
         // Enable best answer
-        if($this->parent->extensionEnabled('wiwatsrt-best-answer'))
+        if($this->parent->extensionEnabled('fof-best-answer'))
         {
             $this->enableBestAnswer = true;
         }
@@ -104,6 +104,16 @@ class QADiscussion
      */
     private function createTags()
     {
+        $tags = $this->discussion->tags;
+        $robots = true;
+        foreach ($tags as $tag) {
+            if (array_search($tag->id, $this->parent->noIndexTags) !== false) {
+                $robots = false;
+            }
+        }
+
+        $this->parent->setRobots($robots);
+        
         // Set current URL
         $url = '/d/' . $this->discussion->getAttribute('id') . '-' . $this->discussion->getAttribute('slug');
         $fullUrl = $this->parent->getApplicationPath($url);

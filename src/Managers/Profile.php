@@ -1,9 +1,7 @@
 <?php
 namespace V17Development\FlarumSeo\Managers;
 
-use Flarum\Discussion\DiscussionRepository;
 use Flarum\User\UserRepository;
-
 use V17Development\FlarumSeo\Listeners\PageListener;
 
 /**
@@ -53,6 +51,8 @@ class Profile
     private function createTags()
     {
         if($this->user === null) return;
+
+        $this->parent->setRobots();
 
         $joinedAt = (new \DateTime($this->user->getAttribute('joined_at')))->format("c");
 
